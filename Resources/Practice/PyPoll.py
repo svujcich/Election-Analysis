@@ -2,9 +2,9 @@
 import csv
 import os
 # Assign a variable to load a file from a path.
-file_to_load = os.path.join("Election-Analysis/Resources","election_results.csv") #path has to start at the highest level folder
+file_to_load = os.path.join("Resources","election_results.csv") #path has to start at the highest level folder
 # Assign a variable to save the file to a path.
-file_to_save = os.path.join("Election-Analysis/Analysis", "election_analysis.txt")
+file_to_save = os.path.join("Resources/Practice", "election_analysis.txt")
 
 #initialize votes to 0
 total_votes = 0
