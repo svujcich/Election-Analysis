@@ -51,35 +51,6 @@ This script provides versatility for future local congressional elections becaus
 
 If modified, this script could collect other insightful information; one example would be age demographic information. Using a birth date, the script could be programmed to separate voters into age groups, and output the percentage of voters that submitted ballots. This information would be useful in allocating resources for outreach to improve voting rates. For example, if younger voters 18 – 25 are significantly less involved than other age groups, voter registration campaigns could focus more effort at college campuses, or send some high energy advocates to high schools to get younger participants excited about an upcoming election.  
 	
-By adding relevant data to the election_results.csv and adding sections of similar code to the existing structure, it is possible to use take the election script a step further and modify it to calculate votes for ion the pyPoll challenge code, the following steps would be followed:
-  
-  1. Add a new column to the election-results.csv that holds the results for the the ballot measure
-  2. Initialize variables 
-	  * Create A list of voting options (bus_lane_options[]) 
-	   * Create A bus lane dictionary (bus_lane_votes{}) to store the votes for each option (True or False). 
-	   * Set the value of each option to  in the dictionary to 0 (bus_lane_votes[bus_lane_options] = 0) so the code has a numeric value to add to
-	   * Declare a variable to hold the name of the winning result (bus_lane_result =’’) 
-	   * Set the **winning count** of votes to 0 (largest_bus_lane_vote  = 0). 
+It is also be possible to create a function to process any boolean value for any ballot measure (measure passes or measure does not pass). This would be achieved by adding a new column with ballot measure results to the csv file, and creating a function with the argument (position) to the script. You could effectively tell the function to identify the voting topic using position argument to return the text in that position in the header row. The function would create a dictionary for the votes, then loop through the data, look at a specific position in each row of data, and target the values in that position. It would track the number of true and false values (for and against votes), using an if statement; if the value is true, add one vote for the measure to pass, and if false, add one vote for blocking the measure. Once the votes have been tallied, the function would use an if statement with a locigal opperator to say if the votes for the ballot measure are greater than the votes against the ballot measure, the measure passes, and if the votes against the measure have more votes, the measure is blocked. Finally, the function would print the winning result to the text file with the other results. 
 
-3. Use the existing structure to loop through each row of data. 
-	- If the value is true: 
-	  * Add one vote to the dictionary for true (bus_lane_votes[‘True’] +=1) 
-	  * If the result is not true, it would move on to the next condition. 
-	- If the result is false:
-	  * Add one vote to the dictionary for false (bus_lane_votes[‘False’] +=1), 
-4. Create aother loop to extract the values from the dictionary and determine the winning selection using the following code:
-
-```
-for lane_vote in bus_lane_votes 
-    if (bus_lane_votes > largest_bus_lane_vote): 
-    bus_lane_result = lane_vote 
-```
- - to tell the program:
-	 * initialize a variable to refer to each key in the bus_lane_votes dictionary
-	 * if the number of votes for the key is the highest value in the dictionary
-	 * the winning result is the key with the most votes
-
-5. Format and transcribe the results. Use an f string including plain text concatenated with computer calculated values to provide instructions on what to print. Then use the statement, print(bus_lane_result) to send the results to the terminal, and/or txt_file.write(bus_lane_result) to send the results to the text file the candidate and county results are being sent to. 
-
-Whatever the ballot measure is, whether it is building a new Publie Library, or creating rules for environmental protection, the previously described process can be adapted to calculate the voting outcome of the any proposal.
-
+Adding a function to calculate the results for a boolean ballot measure would enchance this script with a flexible piece of framework tht could be reused for any number of ballot measures, election after election. Whether it is funding a Public Library or proposing measures for environmental protection, calculating the winning decision is as easy as simply calling the function and providing an argument! 
