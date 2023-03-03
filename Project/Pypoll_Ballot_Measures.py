@@ -57,70 +57,83 @@ with open(file_to_load) as election_data:
 #     # add ballot measure names to list
     for index, col in enumerate(list_column_names):
         if col == "Ballot ID":
-            print("Ballot ID NOT ballot measure")
+           pass
         elif col == "County":
-            print("County NOT ballot measure")
+            pass
         elif col == "Candidate":
-            print("Candidate NOT ballot measure")  
+            pass
         else:
             ballot_measure_options.append({index: col})
     print(ballot_measure_options)
     
+    # read headers
+    headers = next(reader)
 
-#     # read headers
-#     headers = next(reader)
+    # For each row in csv file
+    for row in reader:
 
-#     # For each row in csv file
-#     for row in reader:
+        #Add to the total vote count
+        total_votes = total_votes +1
 
-#         #Add to the total vote count
-#         total_votes = total_votes +1
+        # Varibles
+        #get the candidate name from each row 
+        candidate_name = row[2]
 
-#         #get the candidate name from each row 
-#         candidate_name = row[2]
+        # 3: Extract the county name from each row.
+        county_name = row[1]
+         
+        # CANDIDATE VOTES
+        # If the candidate does not match any existing candidate add it to
+        # the candidate list
+        if candidate_name not in candidate_options:
 
-#         # 3: Extract the county name from each row.
-#         county_name = row[1] 
+            #Add the candidate name to candidate list
+            candidate_options.append (candidate_name)
+
+            #and begin tracking  that candidate voter count
+            candidate_votes[candidate_name] = 0
+
+        #add a vote to that candidate count
+        candidate_votes[candidate_name] +=1
+
+        # COUNTY VOTES
+        # 4a: Write an if statement that checks that the
+        # county does not match any existing county in the county list.
+        if county_name not in county_names:
+
+            # 4b: Add the existing county to the list of counties.
+            county_names.append(county_name)
+
+            # 4c: Begin tracking the county's vote count.
+            county_votes[county_name] = 0
+
+        # 5: Add a vote to that county's vote count.
+        county_votes[county_name] +=1
         
-#         # WORK WEEK 
-#         # Extract the work_week data from each row.
-#         work_week = row[3]
-#         # add work week options to list
-#         if work_week not in work_week_options:
-#             work_week_options.append(work_week)
-#             # set the number of votes = 0
-#             work_week_votes[work_week] = 0
-#         # add a vote for every occurence
-#         work_week_votes[work_week] +=1
-#         # print(f'WORK WEEK VOTES{work_week_votes}')
 
+    #BALLOT MEASURES        
+    # access index numbers of ballot measure columns
+    ballot_measure_indexes = [] 
+    for i in ballot_measure_options:
+        for j in i:
+            # print(j)
+            ballot_measure_indexes.append(j)
+    print(ballot_measure_indexes)
+            
+            
+    #     work_week = []
+    #     print(i)
+    # print(work_week)
+            
+        # # add work week options to list
+        # if work_week not in work_week_options:
+        #     work_week_options.append(work_week)
+        #     # set the number of votes = 0
+        #     work_week_votes[work_week] = 0
+        # # add a vote for every occurence
+        # work_week_votes[work_week] +=1
+        # # print(f'WORK WEEK VOTES{work_week_votes}')
 
-#         # If the candidate does not match any existing candidate add it to
-#         # the candidate list
-#         if candidate_name not in candidate_options:
-
-#             #Add the candidate name to candidate list
-#             candidate_options.append (candidate_name)
-
-#             #and begin tracking  that candidate voter count
-#             candidate_votes[candidate_name] = 0
-
-#         #add a vote to that candidate count
-#         candidate_votes[candidate_name] +=1
-
-#         # 4a: Write an if statement that checks that the
-#         # county does not match any existing county in the county list.
-#         if county_name not in county_names:
-
-#             # 4b: Add the existing county to the list of counties.
-#             county_names.append(county_name)
-
-#             # 4c: Begin tracking the county's vote count.
-#             county_votes[county_name] = 0
-
-#         # 5: Add a vote to that county's vote count.
-#         county_votes[county_name] +=1
-        
     
 # #save the results to our text file
 # with open(file_to_save,'w') as txt_file:
