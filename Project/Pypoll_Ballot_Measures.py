@@ -38,6 +38,7 @@ work_week_votes = {}
 #make a list of column Names
 list_column_names = []
 
+
 # Read the csv and convert it into a list of dictionaries
 with open(file_to_load) as election_data:
     reader = csv.reader(election_data) #delimiter=','
@@ -49,23 +50,22 @@ with open(file_to_load) as election_data:
         break    
     #extract list in list
     list_column_names = list_column_names[0]
-    print(list_column_names)
+    # print(list_column_names)
 
-    
+    #get key and value of items in list_column_names
+    # print(list(enumerate(list_column_names)))
 #     # add ballot measure names to list
-#     print('TEST')
-#     for i in list_column_names:
-#         for j in i:
-#             if j == "Ballot ID":
-#                 ballot_measure_options.append("")
-#             elif j == "County":
-#                 ballot_measure_options.append("")
-#             elif j == "Candidate":
-#                 ballot_measure_options.append("")   
-#             else:
-#                 ballot_measure_options.append(j)
-#     print(ballot_measure_options)
-           
+    for index, col in enumerate(list_column_names):
+        if col == "Ballot ID":
+            print("Ballot ID NOT ballot measure")
+        elif col == "County":
+            print("County NOT ballot measure")
+        elif col == "Candidate":
+            print("Candidate NOT ballot measure")  
+        else:
+            ballot_measure_options.append({index: col})
+    print(ballot_measure_options)
+    
 
 #     # read headers
 #     headers = next(reader)
