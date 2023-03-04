@@ -111,16 +111,34 @@ with open(file_to_load) as election_data:
         county_votes[county_name] +=1
         
 
-    #BALLOT MEASURES        
-    # access index numbers of ballot measure columns
-    ballot_measure_indexes = [] 
-    for i in ballot_measure_options:
-        for j in i:
-            # print(j)
-            ballot_measure_indexes.append(j)
-    print(ballot_measure_indexes)
+        #BALLOT MEASURES        
+        # access index numbers of ballot measure columns
+        ballot_measure_indexes = [] 
+        for i in ballot_measure_options:
+            for j in i:
+                # print(j)
+                ballot_measure_indexes.append(j)
+        # print(ballot_measure_indexes)
+            
+        #Add to the total vote count
+            total_votes = total_votes +1
+            
+            for i in ballot_measure_indexes:
+                
+                topic = row[i]
+                
+                topic_votes = []
+                
+                if topic not in topic_votes:
+                    topic_votes.append(topic)
+                    topic_votes[topic] = 0
+                topic_votes[topic] += 1
+                print("MOMENT OF TRUTH!")
+                print(i, topic_votes)
+                
             
             
+                      
     #     work_week = []
     #     print(i)
     # print(work_week)
