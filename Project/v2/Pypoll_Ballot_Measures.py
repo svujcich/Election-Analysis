@@ -3,9 +3,9 @@ import csv
 import os
 
 # add a variable to load a file from path
-file_to_load = os.path.join('Project', 'Resources', 'votes_with_ballot_measures.csv')
+file_to_load = os.path.join('Project', 'v2', 'Resources','votes_with_ballot_measures.csv')
 #print (File_to_load)
-file_to_save = os.path.join('Project','Results','new_election_results.txt' )
+file_to_save = os.path.join('Project', 'v2', 'Results','new_election_results.txt' )
 
 #Initialize a total vote counter
 total_votes = 0
