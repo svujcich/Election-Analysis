@@ -29,11 +29,14 @@ largest_county_votes = 0
 
 # Create a county list and county votes dictionary.
 ballot_measure_options = []
-ballot_measure_votes = {}
 
 # create varibles specific to the work week
 work_week_options = []
 work_week_votes = {}
+
+# create varibles specific to the work week
+hoa_options = []
+hoa_votes = {}
 
 #make a list of column Names
 list_column_names = []
@@ -61,11 +64,28 @@ with open(file_to_load) as election_data:
         elif col == "County":
             pass
         elif col == "Candidate":
-            pass
+            pass         
         else:
+            # ballot_measure_options.append({index: col})
             ballot_measure_options.append({index: col})
-    print(ballot_measure_options)
-    
+        
+    #ballot topics
+    work_week = ""
+    hoa = "" 
+   
+    # can I use python to translate     
+    # use dictionary to assign varibles for row names
+    for index, col in enumerate(list_column_names):
+        if col == "Four Day Work Week":
+            work_week = f"row[{index}]"
+        elif col == "Add HOA":
+            hoa = f"row[{index}]"
+        else:
+            pass
+    # print(work_week)
+    # print(hoa)
+        
+                       
     # read headers
     headers = next(reader)
 
@@ -75,13 +95,16 @@ with open(file_to_load) as election_data:
         #Add to the total vote count
         total_votes = total_votes +1
 
-        # Varibles
+        # VARIBLES
         #get the candidate name from each row 
         candidate_name = row[2]
 
         # 3: Extract the county name from each row.
         county_name = row[1]
-         
+        
+        # work_week = row[3]
+        # hoa = row[4]
+      
         # CANDIDATE VOTES
         # If the candidate does not match any existing candidate add it to
         # the candidate list
@@ -111,46 +134,13 @@ with open(file_to_load) as election_data:
         county_votes[county_name] +=1
         
 
-        #BALLOT MEASURES        
-        # access index numbers of ballot measure columns
-        ballot_measure_indexes = [] 
-        for i in ballot_measure_options:
-            for j in i:
-                # print(j)
-                ballot_measure_indexes.append(j)
-        # print(ballot_measure_indexes)
-            
-        #Add to the total vote count
-            total_votes = total_votes +1
-            
-            for i in ballot_measure_indexes:
+        #BALLOT MEASURES
                 
-                topic = row[i]
-                
-                topic_votes = []
-                
-                if topic not in topic_votes:
-                    topic_votes.append(topic)
-                    topic_votes[topic] = 0
-                topic_votes[topic] += 1
-                print("MOMENT OF TRUTH!")
-                print(i, topic_votes)
-                
-            
-            
-                      
-    #     work_week = []
-    #     print(i)
-    # print(work_week)
-            
-        # # add work week options to list
-        # if work_week not in work_week_options:
-        #     work_week_options.append(work_week)
-        #     # set the number of votes = 0
-        #     work_week_votes[work_week] = 0
-        # # add a vote for every occurence
-        # work_week_votes[work_week] +=1
-        # # print(f'WORK WEEK VOTES{work_week_votes}')
+
+
+
+
+
 
     
 # #save the results to our text file
